@@ -29,7 +29,7 @@ Aşağıdaki adımları takip ederek projeyi yerel makinenize kurabilir ve çal�
 
      1.Performance\_moniter\_app.exe yi ve requirements.txt indirin
 
-     3
+     2.Performance\_moniter\_app.exe çalıştırın
 
    📦 requirements.txt
 
