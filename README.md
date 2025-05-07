@@ -9,7 +9,9 @@ performance-monitor-app/
 ├── main.py           # Uygulama kodu
 ├── requirements.txt  # Bağımlılıklar
 ├── README.md         # Proje açıklaması ve kurulum adımları
+├── LICENSE           # Lisans
 └── .gitignore        # Git göz ardı listesi
+        
 ```
 
 ## 🚀 Başlarken
