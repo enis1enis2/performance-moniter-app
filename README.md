@@ -9,9 +9,7 @@ performance-monitor-app/
 ├── main.py           # Uygulama kodu
 ├── requirements.txt  # Bağımlılıklar
 ├── README.md         # Proje açıklaması ve kurulum adımları
-├── LICENSE           # Lisans
 └── .gitignore        # Git göz ardı listesi
-        
 ```
 
 ## 🚀 Başlarken
@@ -24,57 +22,18 @@ Aşağıdaki adımları takip ederek projeyi yerel makinenize kurabilir ve çal�
 2. Windows için uygun installer (x86-64) indirin.
 3. İndirilen `.exe` dosyasını çalıştırın ve **Add Python to PATH** seçeneğini işaretleyerek ilerleyin.
 
-### 2. Depoyu Klonlama
+###
 
-```bash
-git clone https://github.com/kullaniciadi/performance-monitor-app.git
-cd performance-monitor-app
-```
+2. [https://github.com/enis1enis2/performance-moniter-app/releases/](https://github.com/enis1enis2/performance-moniter-app/releases/) adresine gidin
 
-### 3. Sanal Ortam (venv) Oluşturma ve Aktifleştirme
+     1.Performance\_moniter\_app.exe yi ve requirements.txt indirin
 
-**Windows + PowerShell** için:
+     3
 
-```powershell
-python -m venv venv
-Set-ExecutionPolicy RemoteSigned -Scope CurrentUser  # Sadece ilk kez gerekirse
-.
-\venv\Scripts\Activate.ps1
-```
-
-**Windows + CMD** için:
-
-```cmd
-python -m venv venv
-.\venv\Scripts\activate.bat
-```
-
-### 4. Gerekli Paketlerin Yüklenmesi
-
-```bash
-pip install -r requirements.txt
-```
-
-### 5. Uygulamayı Çalıştırma
-
-```bash
-python main.py
-```
-
-### 6. .exe Dosyası Oluşturma (Opsiyonel)
-
-PyInstaller ile tek dosyalı EXE üretmek için:
-
-```bash
-pyinstaller --onefile --windowed main.py
-```
-
-Oluşan `dist/main.exe` dosyasını `dist` klasöründen çalıştırabilirsiniz.
-
-## 📦 requirements.txt
+   📦 requirements.txt
 
 ```
-psutil
+psutil 
 pyqt5
 WMI
 ```
