@@ -4,7 +4,7 @@ import psutil                             # CPU & Bellek için
 import wmi                                 # WMI için
 from PyQt5.QtWidgets import (
     QApplication, QMainWindow, QLabel,
-    QPushButton, QMessageBox
+    QPushButton, QMessageBox, QWidget, QVBoxLayout
 )
 from PyQt5.QtCore import QTimer
 
@@ -46,21 +46,33 @@ class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Performans Takip")
-        self.setGeometry(100, 100, 300, 200)
+        # self.setGeometry(100, 100, 300, 200) # Geometri layout tarafından yönetilecek
+        self.setMinimumSize(250, 180) # Daha iyi bir minimum boyut
+
+        # Merkezi widget ve layout
+        central_widget = QWidget() 
+        self.setCentralWidget(central_widget)
+        
+        layout = QVBoxLayout() 
+        central_widget.setLayout(layout)
+
+        layout.setContentsMargins(15, 15, 15, 15) # Pencere kenar boşlukları
+        layout.setSpacing(10) # Widget'lar arası boşluk
 
         # CPU ve Bellek etiketleri
-        self.cpu_label = QLabel("CPU Kullanımı: …", self)
-        self.cpu_label.move(20, 20)
-        self.mem_label = QLabel("Boş Bellek (MB): …", self)
-        self.mem_label.move(20, 60)
+        self.cpu_label = QLabel("CPU Kullanımı: …") 
+        layout.addWidget(self.cpu_label)
+
+        self.mem_label = QLabel("Boş Bellek (MB): …") 
+        layout.addWidget(self.mem_label)
 
         # Güncelle butonu
-        self.refresh_btn = QPushButton("Güncelle", self)
-        self.refresh_btn.move(20, 100)
+        self.refresh_btn = QPushButton("Güncelle") 
         self.refresh_btn.clicked.connect(self.refresh_stats)
-
+        layout.addWidget(self.refresh_btn)
+        
         # Otomatik yenileme (opsiyonel)
-        self.timer = QTimer(self)
+        self.timer = QTimer(self) # Timer'ın parent'ı MainWindow olabilir
         self.timer.timeout.connect(self.refresh_stats)
         self.timer.start(5000)  # her 5 saniyede bir
 
@@ -70,7 +82,7 @@ class MainWindow(QMainWindow):
 
     def refresh_stats(self):
         """CPU ve bellek değerlerini oku ve GUI'de güncelle."""
-        cpu = psutil.cpu_percent(interval=1)           # blocking; ilk çağrı 0.0 olabilir :contentReference[oaicite:7]{index=7}
+        cpu = psutil.cpu_percent(interval=1)
         mem = psutil.virtual_memory().available // (1024**2)  # MB cinsinden boş bellek
         self.cpu_label.setText(f"CPU Kullanımı: {cpu:.1f}%")
         self.mem_label.setText(f"Boş Bellek (MB): {mem}")
@@ -101,6 +113,33 @@ class MainWindow(QMainWindow):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
+
+    # Modern ve temiz bir görünüm için QSS
+    qss = """
+        QMainWindow {
+            background-color: #f0f0f0;
+            font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+        }
+        QLabel {
+            color: #333333;
+            font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+            font-size: 10pt;
+        }
+        QPushButton {
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            padding: 5px 10px;
+            font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+            font-size: 10pt;
+            font-weight: bold;
+        }
+        QPushButton:hover {
+            background-color: #0056b3;
+        }
+    """
+    app.setStyleSheet(qss)
+
     window = MainWindow()
     window.show()
     sys.exit(app.exec_())
